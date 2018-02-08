@@ -125,7 +125,7 @@ public class VentanaPrincipal {
 		btnFuente = new JButton("Fuente");
 		btnFuente.setEnabled(false);
 		try {
-			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
+			this.canvas = ImageIO.read(new File("imagenes//font.png"));
 			this.btnFuente.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -134,7 +134,7 @@ public class VentanaPrincipal {
 		btnSeleccionarTodo = new JButton("Selec.Todo");
 		btnSeleccionarTodo.setEnabled(false);
 		try {
-			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
+			this.canvas = ImageIO.read(new File("imagenes//cursor.png"));
 			this.btnSeleccionarTodo.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -143,7 +143,7 @@ public class VentanaPrincipal {
 		btnHora = new JButton("Hora");
 		btnHora.setEnabled(false);
 		try {
-			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
+			this.canvas = ImageIO.read(new File("imagenes//reloj.png"));
 			btnHora.setIcon(new ImageIcon(this.canvas));
 			this.btnHora.setFont(fuenteHerramientas);
 			this.btnHora.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
