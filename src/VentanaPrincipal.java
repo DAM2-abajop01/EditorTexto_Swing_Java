@@ -386,7 +386,6 @@ public class VentanaPrincipal {
 		this.pegar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
 		this.cargarDiccionario.setMnemonic(KeyEvent.VK_D);
 		this.cargarDiccionario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-
 		// Barra de Herramientas
 		this.ventana.setJMenuBar(bar);
 		this.bar.add(menu);
@@ -397,12 +396,6 @@ public class VentanaPrincipal {
 		this.menu.add(guardarComo);
 		this.menu.addSeparator();
 		this.menu.add(salir);
-		// Barra Editar
-		this.bar.add(menuEditar);
-		this.menuEditar.add(copiar);
-		this.menuEditar.add(pegar);
-		this.menuEditar.addSeparator();
-		this.menuEditar.add(reemplazar);
 		// Barra Inicio
 		bar.add(menuEquipo);
 		menuEquipo.add(subMenuRecientes);
@@ -413,6 +406,12 @@ public class VentanaPrincipal {
 		menuEquipo.add(itemSeleccionarTodoYCopiar);
 		menuEquipo.addSeparator();
 		menuEquipo.add(itemHora);
+		// Barra Editar
+		this.bar.add(menuEditar);
+		this.menuEditar.add(copiar);
+		this.menuEditar.add(pegar);
+		this.menuEditar.addSeparator();
+		this.menuEditar.add(reemplazar);
 		// JToolBar
 		this.toolBar.add(bCargar);
 		this.toolBar.add(bGuardar);
@@ -659,6 +658,8 @@ public class VentanaPrincipal {
 		this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.ventana.setVisible(true);
 		inicializarComponentes();
+		componentesImplementacionEquipo();
+		toolbarImplementacionEquipo();
 		addElements();
 		inicializarListeners();
 	}
