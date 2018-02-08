@@ -71,8 +71,8 @@ public class VentanaPrincipal {
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	// Variable de la implementcion de Ismael
-	private JMenu menuIsmael;
+	// Variable de la implementcion de Equipo
+	private JMenu menuEquipo;
 	private JMenuItem itemFuente;
 	private JButton btnFuente;
 	private JMenuItem itemSeleccionarTodo, itemSeleccionarTodoYCopiar, itemHora;
@@ -82,10 +82,10 @@ public class VentanaPrincipal {
 	private ArrayList<String> rutasRecientes;
 	// Item cargar hay que meter metodos
 
-	public void componentesimplementacionIsmael() {
-		// En el menu bar Ismael
-		menuIsmael = new JMenu("Ismael");
-		bar.add(menuIsmael);
+	public void componentesimplementacionEquipo() {
+		// En el menu bar Equipo
+		menuEquipo = new JMenu("AL-IS");
+		bar.add(menuEquipo);
 
 		// SUBMENU
 		subMenuRecientes = new JMenu("Recientes");
@@ -104,48 +104,42 @@ public class VentanaPrincipal {
 				subMenuRecientes.add(textoSubmenu);
 			}
 		}
-		menuIsmael.add(subMenuRecientes);
+		menuEquipo.add(subMenuRecientes);
 
-		menuIsmael.addSeparator();
+		menuEquipo.addSeparator();
 
 		// Fuente
 		itemFuente = new JMenuItem("Fuente");
 		itemFuente.setEnabled(false);
 		itemFuente.setMnemonic(KeyEvent.VK_F);
 		itemFuente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
-		menuIsmael.add(itemFuente);
+		menuEquipo.add(itemFuente);
 
-		menuIsmael.addSeparator();
+		menuEquipo.addSeparator();
 
 		itemSeleccionarTodo = new JMenuItem("Selec.Todo");
 		itemSeleccionarTodo.setEnabled(false);
 		itemSeleccionarTodo.setMnemonic(KeyEvent.VK_N);
 		itemSeleccionarTodo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		menuIsmael.add(itemSeleccionarTodo);
+		menuEquipo.add(itemSeleccionarTodo);
 
 		itemSeleccionarTodoYCopiar = new JMenuItem("Selec All+Copy");
 		itemSeleccionarTodoYCopiar.setEnabled(false);
 		itemSeleccionarTodoYCopiar.setMnemonic(KeyEvent.VK_M);
 		itemSeleccionarTodoYCopiar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
-		menuIsmael.add(itemSeleccionarTodoYCopiar);
+		menuEquipo.add(itemSeleccionarTodoYCopiar);
 
-		menuIsmael.addSeparator();
+		menuEquipo.addSeparator();
 
 		itemHora = new JMenuItem("Hora");
 		itemHora.setEnabled(true);
 		itemHora.setMnemonic(KeyEvent.VK_H);
 		itemHora.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
-		menuIsmael.add(itemHora);
+		menuEquipo.add(itemHora);
 
 	}
 
-	/**
-	 * En listener item cargar -> itemFuente.setEnabled(true);
-	 * 
-	 * componentesimplementacionIsmael(); antes de panel busqueda
-	 */
-
-	public void toolbarImplementacionIsmael() {
+	public void toolbarImplementacionEquipo() {
 		// ToolBar Fuente
 		btnFuente = new JButton("Fuente");
 		btnFuente.setEnabled(false);
@@ -182,7 +176,7 @@ public class VentanaPrincipal {
 		toolBar.add(btnHora);
 	}
 
-	public void listenedImplementacionIsmael() {
+	public void listenedImplementacionEquipo() {
 		// Fuente
 		btnFuente.addActionListener(new ActionListener() {
 			@Override
@@ -243,7 +237,6 @@ public class VentanaPrincipal {
 				String parte03 = cadenaOriginal.substring(inicio, cadenaOriginal.length());
 				String resultado = parte01 + parte02 + parte03;
 				textoUsuario.setText(resultado);
-
 			}
 		});
 
@@ -259,22 +252,16 @@ public class VentanaPrincipal {
 							manejador.setFicheroActual(new File(ruta));
 							String cadena = manejador.cargarFichero();
 							textoUsuario.setText(cadena);
-
 							textoUsuario.setFont(new Font("Verdana", Font.PLAIN, 12));
-
 							textoUsuario.setEnabled(true);
-
 							bCopiar.setEnabled(true);
 							bPegar.setEnabled(true);
-
 							guardar.setEnabled(true);
 							guardarComo.setEnabled(true);
 							bGuardar.setEnabled(true);
 							bGuardarComo.setEnabled(true);
 							textoUsuario.setEnabled(true);
 							reemplazar.setEnabled(true);
-
-							// Listened Ismael
 							btnFuente.setEnabled(true);
 							itemFuente.setEnabled(true);
 							btnSeleccionarTodo.setEnabled(true);
@@ -394,8 +381,8 @@ public class VentanaPrincipal {
 		this.bBuscar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		// Diccionario
 		this.manejadorDiccionario = new ManejadorDiccionario();
-		componentesimplementacionIsmael();
-		toolbarImplementacionIsmael();
+		componentesimplementacionEquipo();
+		toolbarImplementacionEquipo();
 		this.bCorregir = new JButton("Corregir");
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//check.png"));
@@ -486,8 +473,6 @@ public class VentanaPrincipal {
 						btnSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodoYCopiar.setEnabled(true);
-
-						// Listened Ismael
 						btnFuente.setEnabled(true);
 						itemFuente.setEnabled(true);
 						btnSeleccionarTodo.setEnabled(true);
@@ -658,7 +643,7 @@ public class VentanaPrincipal {
 				palabraAnterior = palabra;
 			}
 		});
-		listenedImplementacionIsmael();
+		listenedImplementacionEquipo();
 
 	}
 
