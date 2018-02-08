@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -64,6 +66,243 @@ public class VentanaPrincipal {
 		this.ventana.setBounds(500, 300, 750, 600);
 		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	// Variable de la implementcion de Ismael
+	private JMenu menuIsmael;
+	private JMenuItem itemFuente;
+	private JButton btnFuente;
+	private JMenuItem itemSeleccionarTodo, itemSeleccionarTodoYCopiar, itemHora;
+	private JButton btnSeleccionarTodo, btnHora;
+	private JMenu subMenuRecientes;
+	private ArrayList<JMenuItem> itemSubMenuRecientes;
+	private ArrayList<String> rutasRecientes;
+	//Item cargar hay que meter metodos
+
+	public void componentesimplementacionIsmael() {
+		// En el menu bar Ismael
+		menuIsmael = new JMenu("Ismael");
+		bar.add(menuIsmael);
+
+		// SUBMENU
+		subMenuRecientes = new JMenu("Recientes");
+		itemSubMenuRecientes = new ArrayList<>();
+		rutasRecientes = new ArrayList<>();
+		try {
+			rutasRecientes = manejador.obtenerLineasDelFichero();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (!rutasRecientes.isEmpty()) {
+			for (int i = 0; i < rutasRecientes.size(); i++) {
+				JMenuItem textoSubmenu = new JMenuItem(rutasRecientes.get(i));
+				itemSubMenuRecientes.add(textoSubmenu);
+				subMenuRecientes.add(textoSubmenu);
+			}
+		}
+		menuIsmael.add(subMenuRecientes);
+
+		menuIsmael.addSeparator();
+
+		// Fuente
+		itemFuente = new JMenuItem("Fuente");
+		itemFuente.setEnabled(false);
+		itemFuente.setMnemonic(KeyEvent.VK_F);
+		itemFuente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
+		menuIsmael.add(itemFuente);
+
+		menuIsmael.addSeparator();
+
+		itemSeleccionarTodo = new JMenuItem("Selec.Todo");
+		itemSeleccionarTodo.setEnabled(false);
+		itemSeleccionarTodo.setMnemonic(KeyEvent.VK_N);
+		itemSeleccionarTodo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		menuIsmael.add(itemSeleccionarTodo);
+
+		itemSeleccionarTodoYCopiar = new JMenuItem("Selec All+Copy");
+		itemSeleccionarTodoYCopiar.setEnabled(false);
+		itemSeleccionarTodoYCopiar.setMnemonic(KeyEvent.VK_M);
+		itemSeleccionarTodoYCopiar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
+		menuIsmael.add(itemSeleccionarTodoYCopiar);
+
+		menuIsmael.addSeparator();
+
+		itemHora = new JMenuItem("Hora");
+		itemHora.setEnabled(true);
+		itemHora.setMnemonic(KeyEvent.VK_H);
+		itemHora.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
+		menuIsmael.add(itemHora);
+
+	}
+
+	/**
+	 * En listener item cargar -> itemFuente.setEnabled(true);
+	 * 
+	 * componentesimplementacionIsmael(); antes de panel busqueda
+	 */
+
+	public void toolbarImplementacionIsmael() {
+		// ToolBar Fuente
+		btnFuente = new JButton("Fuente");
+		btnFuente.setEnabled(false);
+		try {
+			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
+			this.btnFuente.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		toolBar.add(btnFuente);
+
+		btnSeleccionarTodo = new JButton("Selec.Todo");
+		btnSeleccionarTodo.setEnabled(false);
+		try {
+			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
+			this.btnSeleccionarTodo.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		toolBar.add(btnSeleccionarTodo);
+
+		btnHora = new JButton("Hora");
+		try {
+			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
+
+			btnHora.setIcon(new ImageIcon(this.canvas));			
+			this.btnHora.setFont(fuenteHerramientas);
+			this.btnHora.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		toolBar.add(btnHora);
+	}
+
+	public void listenedImplementacionIsmael() {
+		// Fuente
+		btnFuente.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				itemFuente.doClick();
+			}
+		});
+
+		itemFuente.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DialogoFuente dialo = new DialogoFuente(VentanaPrincipal.this);
+				dialo.setVisible(true);
+			}
+		});
+
+		btnSeleccionarTodo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				itemSeleccionarTodo.doClick();
+			}
+		});
+
+		itemSeleccionarTodo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textoUsuario.requestFocus();
+				textoUsuario.selectAll();
+			}
+		});
+		itemSeleccionarTodoYCopiar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textoUsuario.requestFocus();
+				textoUsuario.selectAll();
+				textoUsuario.copy();
+			}
+		});
+
+		btnHora.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				itemHora.doClick();
+			}
+		});
+		itemHora.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Date fechaActual = new Date();
+				int inicio = textoUsuario.getSelectionStart();
+				String cadenaOriginal = textoUsuario.getText();
+				String parte01 = cadenaOriginal.substring(0, inicio);
+				String parte02 = " " + fechaActual + " ";
+				String parte03 = cadenaOriginal.substring(inicio, cadenaOriginal.length());
+				String resultado = parte01 + parte02 + parte03;
+				textoUsuario.setText(resultado);
+
+			}
+		});
+
+		// Listado del submenu
+		if (!itemSubMenuRecientes.isEmpty()) {
+			for (int i = 0; i < itemSubMenuRecientes.size(); i++) {
+				itemSubMenuRecientes.get(i).addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							String ruta = e.toString().substring(e.toString().indexOf("cmd=") + 4,
+									e.toString().indexOf("when=") - 1);
+							manejador.setFicheroActual(new File(ruta));
+							String cadena = manejador.cargarFichero();
+							textoUsuario.setText(cadena);
+
+							textoUsuario.setFont(new Font("Verdana", Font.PLAIN, 12));
+							
+							textoUsuario.setEnabled(true);
+						
+							bCopiar.setEnabled(true);
+							bPegar.setEnabled(true);
+
+
+							guardar.setEnabled(true);
+							guardarComo.setEnabled(true);
+							bGuardar.setEnabled(true);
+							bGuardarComo.setEnabled(true);
+							textoUsuario.setEnabled(true);
+							reemplazar.setEnabled(true);
+							
+							// Listened Ismael
+							btnFuente.setEnabled(true);
+							itemFuente.setEnabled(true);
+							btnSeleccionarTodo.setEnabled(true);
+							itemSeleccionarTodo.setEnabled(true);
+							itemSeleccionarTodoYCopiar.setEnabled(true);
+
+							textoUsuario.requestFocus();
+
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+			}
+		}
+	}
+
+	public JTextArea getTextArea() {
+		return textoUsuario;
+	}
+
+	public void setTextArea(JTextArea textArea) {
+		this.textoUsuario = textArea;
+	}
+
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 	/**
 	 * Inicializa los componentes
@@ -157,6 +396,10 @@ public class VentanaPrincipal {
 		// Diccionario
 		this.manejadorDiccionario = new ManejadorDiccionario();
 		this.diccionario = new ArrayList<>();
+		
+		componentesimplementacionIsmael();
+		toolbarImplementacionIsmael();
+
 	}
 
 	/**
@@ -233,6 +476,11 @@ public class VentanaPrincipal {
 						bGuardarComo.setEnabled(true);
 						textoUsuario.setEnabled(true);
 						reemplazar.setEnabled(true);
+						btnFuente.setEnabled(true);
+						itemFuente.setEnabled(true);
+						btnSeleccionarTodo.setEnabled(true);
+						itemSeleccionarTodo.setEnabled(true);
+						itemSeleccionarTodoYCopiar.setEnabled(true);
 						textoUsuario.requestFocus();
 					} catch (IOException e) {
 						JOptionPane.showMessageDialog(ventana, "No se puede cargar el fichero");
@@ -371,6 +619,8 @@ public class VentanaPrincipal {
 				palabraAnterior = palabra;
 			}
 		});
+		listenedImplementacionIsmael();
+
 	}
 
 	public String getTextoUsuario() {
