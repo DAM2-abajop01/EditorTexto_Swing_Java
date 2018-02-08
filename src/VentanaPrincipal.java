@@ -82,9 +82,9 @@ public class VentanaPrincipal {
 	private ArrayList<String> rutasRecientes;
 	// Item cargar hay que meter metodos
 
-	public void componentesimplementacionEquipo() {
+	public void componentesImplementacionEquipo() {
 		// En el menu bar Equipo
-		menuEquipo = new JMenu("AL-IS");
+		menuEquipo = new JMenu("AL~IS");
 		bar.add(menuEquipo);
 
 		// SUBMENU
@@ -381,7 +381,7 @@ public class VentanaPrincipal {
 		this.bBuscar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		// Diccionario
 		this.manejadorDiccionario = new ManejadorDiccionario();
-		componentesimplementacionEquipo();
+		componentesImplementacionEquipo();
 		toolbarImplementacionEquipo();
 		this.bCorregir = new JButton("Corregir");
 		try {
