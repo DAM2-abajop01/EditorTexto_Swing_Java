@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 /**
  * @author Alejandro Bajo Pérez
+ * @author Ismael Martín Ramírez
  */
+
 public class ManejadorFichero {
 
 	private File ficheroActual;
 	File ficheroReciente;
-	String rutaFicheroReciente= "src"+File.separator+"recientes"+File.separator+"recientes.txt";
+	String rutaFicheroReciente = "src" + File.separator + "recientes" + File.separator + "recientes.txt";
 
 	/**
 	 * Constructor
@@ -68,7 +70,7 @@ public class ManejadorFichero {
 	public void setFicheroActual(File ficheroActual) {
 		this.ficheroActual = ficheroActual;
 	}
-	
+
 	/**
 	 * Guardar fichero de archivos abiertos recientemente
 	 * 
@@ -76,27 +78,27 @@ public class ManejadorFichero {
 	 * @throws IOException
 	 */
 	public void guardarFicheroRecientes(String contenido) throws IOException {
-		ArrayList<String> rutas = new ArrayList<>();		
+		ArrayList<String> rutas = new ArrayList<>();
 		rutas = obtenerLineasDelFichero();
 		BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroReciente));
 		for (int i = 0; i < rutas.size(); i++) {
-			bw.write(rutas.get(i)+"\n");
+			bw.write(rutas.get(i) + "\n");
 		}
-		bw.write(contenido+"\n");
+		bw.write(contenido + "\n");
 		bw.close();
 	}
-	
-	public ArrayList<String> obtenerLineasDelFichero() throws IOException{
-		ArrayList<String> rutas = new ArrayList<>();		
-			if(ficheroReciente.exists()) {
+
+	public ArrayList<String> obtenerLineasDelFichero() throws IOException {
+		ArrayList<String> rutas = new ArrayList<>();
+		if (ficheroReciente.exists()) {
 			BufferedReader br = new BufferedReader(new FileReader(ficheroReciente));
-			String linea=  br.readLine();
+			String linea = br.readLine();
 			while ((linea) != null) {
 				rutas.add(linea);
-				linea=  br.readLine();
+				linea = br.readLine();
 			}
-			br.close();	
-			}						
+			br.close();
+		}
 		return rutas;
 	}
 }

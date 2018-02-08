@@ -2,11 +2,11 @@ import java.awt.EventQueue;
 
 /**
  * @author Alejandro Bajo Pérez
+ * @author Ismael Martín Ramírez
  */
+
 public class Principal {
-
 	public static void main(String[] args) {
-
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

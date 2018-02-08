@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * @author Alejandro Bajo Pérez
+ * @author Ismael Martín Ramírez
  */
 
 public class ManejadorDiccionario {

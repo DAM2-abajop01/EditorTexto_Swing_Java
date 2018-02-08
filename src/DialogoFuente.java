@@ -1,16 +1,10 @@
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -18,27 +12,21 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+
 
 
 /**
- * @author Alejandro Bajo P
- * @author Ismael Martín R
- *
+ * @author Alejandro Bajo Pérez
+ * @author Ismael Martín Ramírez
  */
+
 public class DialogoFuente extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
 	private VentanaPrincipal frame;
 	private String fuente;
 	private int fontEstilo;
@@ -58,6 +46,8 @@ public class DialogoFuente extends JDialog {
 		this.frame = frame;
 
 		setBounds(100, 100, 500, 600);
+		this.setTitle("Seleccionador de Fuente");
+
 		anadirComponentes();
 		anadirListened();
 	}
@@ -67,7 +57,6 @@ public class DialogoFuente extends JDialog {
 		JPanel panelIzquierda = new JPanel();
 		panelIzquierda.setLayout(new GridLayout(4, 1));
 
-		
 		// Fuentes
 		panelFuente = new JPanel();
 		panelFuente.setLayout(new GridLayout(radiosFuentes.length, 1));
@@ -101,6 +90,7 @@ public class DialogoFuente extends JDialog {
 		sliderTamanio.setPaintLabels(true);
 		panelTamanio.add(sliderTamanio);
 		editTamanio = new JTextField("12");
+		editTamanio.setEditable(false);
 		panelTamanio.add(editTamanio);
 		panelIzquierda.add(panelTamanio);
 
@@ -115,7 +105,7 @@ public class DialogoFuente extends JDialog {
 		jtextPane = new JTextPane();
 		//we.getStyledDocument().setCharacterAttributes(0, frame.getTextArea().getText().length()+1, conjuntodeAtributosNeutro, false); 
 		add(jtextPane);	
-		
+
 	}
 
 	public void anadirListened() {
@@ -142,10 +132,7 @@ public class DialogoFuente extends JDialog {
 			
 				int inicio = frame.getTextArea().getSelectionStart();
 				int fin = frame.getTextArea().getSelectionEnd();
-				SimpleAttributeSet conjuntodeAtributosNeutro = new SimpleAttributeSet();
-				StyleConstants.setUnderline(conjuntodeAtributosNeutro, false);
-				StyleConstants.setForeground(conjuntodeAtributosNeutro, Color.BLACK);
-				
+
 				System.out.println("117DialogoFuente ->Posicion Selecionada: " + inicio + " / " + fin);
 				frame.getTextArea().setFont(new Font(fuente, fontEstilo, Integer.parseInt(editTamanio.getText())));
 
@@ -158,35 +145,12 @@ public class DialogoFuente extends JDialog {
 			public void stateChanged(ChangeEvent e) {
 				editTamanio.setText(String.valueOf(sliderTamanio.getValue()));
 			}
-		});// Fin de slider tamanio
-		this.addComponentListener(new ComponentListener() {
-			@Override
-			public void componentShown(ComponentEvent e) {
-
-			}
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// frame.encenderItemReemplace();
-			}
-		});
-
-		addWindowListener(new WindowAdapter() {
+		}); // Al cerrar la ventana
+		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-
+				frame.activarFuente();
 			}
 		});
-
 	}
 }
