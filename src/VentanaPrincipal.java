@@ -371,6 +371,9 @@ public class VentanaPrincipal {
 			e.printStackTrace();
 		}
 		this.bPegar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+		
+
+		
 		// Buscar
 		this.bBuscar = new JButton();
 		try {
@@ -381,8 +384,7 @@ public class VentanaPrincipal {
 		this.bBuscar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		// Diccionario
 		this.manejadorDiccionario = new ManejadorDiccionario();
-		componentesImplementacionEquipo();
-		toolbarImplementacionEquipo();
+	
 		this.bCorregir = new JButton("Corregir");
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//check.png"));
@@ -414,6 +416,7 @@ public class VentanaPrincipal {
 		this.pegar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
 		this.cargarDiccionario.setMnemonic(KeyEvent.VK_D);
 		this.cargarDiccionario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+
 		// Barra de Herramientas
 		this.ventana.setJMenuBar(bar);
 		this.bar.add(menu);
@@ -436,8 +439,11 @@ public class VentanaPrincipal {
 		this.toolBar.add(bGuardarComo);
 		this.toolBar.addSeparator();
 		this.toolBar.add(bCopiar);
-		this.toolBar.add(bPegar);
+		this.toolBar.add(bPegar);			
 		this.toolBar.add(bCorregir);
+		//Implementacion de equpipo
+		toolbarImplementacionEquipo();
+		componentesImplementacionEquipo();
 		this.toolBar.add(Box.createHorizontalGlue());
 		this.toolBar.add(textoBuscador);
 		this.toolBar.add(bBuscar);
@@ -445,6 +451,7 @@ public class VentanaPrincipal {
 		this.ventana.add(textoUsuario);
 		this.ventana.add(toolBar, BorderLayout.NORTH);
 		this.ventana.add(new JScrollPane(textoUsuario)); // Scroll
+
 	}
 
 	/**
