@@ -1,4 +1,3 @@
-
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,12 +6,10 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
@@ -20,21 +17,21 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * @author Alejandro Bajo Pérez
+ * @author Ismael Martín Ramírez
+ */
+
 public class DialogoFuente extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
 	private VentanaPrincipal frame;
 	private String fuente;
 	private int fontEstilo;
 	JSlider sliderTamanio;
 	private JPanel panelFuente, panelEstilo, panelTamanio;
 	private JButton btnReemplazar;
-	private JLabel labelFuente, labelEstilo, labelTamanio;
-	private JTextField editFuente, editEstilo, editTamanio;
+	private JTextField editTamanio;
 	ButtonGroup grupoFuente, grupoEstilo;
 	JRadioButton[] radiosFuentes = { new JRadioButton("Verdana"), new JRadioButton("Arial"),
 			new JRadioButton("Monospaced"), new JRadioButton("Times New Roman"), new JRadioButton("Comic Sans MS") };
@@ -52,7 +49,6 @@ public class DialogoFuente extends JDialog {
 
 	public void anadirComponentes() {
 		setLayout(new GridLayout(4, 1));
-
 		// Fuentes
 		panelFuente = new JPanel();
 		panelFuente.setLayout(new GridLayout(radiosFuentes.length, 1));
@@ -84,10 +80,11 @@ public class DialogoFuente extends JDialog {
 		sliderTamanio.setPaintLabels(true);
 		panelTamanio.add(sliderTamanio);
 		editTamanio = new JTextField("12");
+		editTamanio.setEditable(false);
 		panelTamanio.add(editTamanio);
 		add(panelTamanio);
 
-		btnReemplazar = new JButton("Hacer.");
+		btnReemplazar = new JButton("Hacer");
 		add(btnReemplazar);
 	}
 
@@ -127,35 +124,12 @@ public class DialogoFuente extends JDialog {
 			public void stateChanged(ChangeEvent e) {
 				editTamanio.setText(String.valueOf(sliderTamanio.getValue()));
 			}
-		});// Fin de slider tamanio
-		this.addComponentListener(new ComponentListener() {
-			@Override
-			public void componentShown(ComponentEvent e) {
-
-			}
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// frame.encenderItemReemplace();
-			}
-		});
-
-		addWindowListener(new WindowAdapter() {
+		}); // Al cerrar la ventana
+		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-
+				frame.activarFuente();
 			}
 		});
-
 	}
 }

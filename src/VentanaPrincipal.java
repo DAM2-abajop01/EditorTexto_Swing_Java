@@ -32,6 +32,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Alejandro Bajo Pérez
  * @author Ismael Martín Ramírez
  */
+
 public class VentanaPrincipal {
 
 	private BufferedImage canvas = null;
@@ -65,6 +66,7 @@ public class VentanaPrincipal {
 	 */
 	public VentanaPrincipal() {
 		this.ventana = new JFrame();
+		this.ventana.setTitle("Editor de Texto");
 		this.ventana.setBounds(500, 300, 750, 600);
 		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -163,6 +165,8 @@ public class VentanaPrincipal {
 		itemFuente.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				itemFuente.setEnabled(false);
+				btnFuente.setEnabled(false);
 				DialogoFuente dialo = new DialogoFuente(VentanaPrincipal.this);
 				dialo.setVisible(true);
 			}
@@ -252,6 +256,12 @@ public class VentanaPrincipal {
 	public void setTextArea(JTextArea textArea) {
 		this.textoUsuario = textArea;
 	}
+
+	public void activarFuente() {
+		itemFuente.setEnabled(true);
+		btnFuente.setEnabled(true);
+	}
+
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	/**
@@ -395,15 +405,14 @@ public class VentanaPrincipal {
 		menuEquipo.add(subMenuRecientes);
 		menuEquipo.addSeparator();
 		menuEquipo.add(itemFuente);
-		menuEquipo.addSeparator();
-		menuEquipo.add(itemSeleccionarTodo);
-		menuEquipo.add(itemSeleccionarTodoYCopiar);
-		menuEquipo.addSeparator();
 		menuEquipo.add(itemHora);
 		// Barra Editar
 		this.bar.add(menuEditar);
 		this.menuEditar.add(copiar);
 		this.menuEditar.add(pegar);
+		this.menuEditar.addSeparator();
+		menuEditar.add(itemSeleccionarTodo);
+		menuEditar.add(itemSeleccionarTodoYCopiar);
 		this.menuEditar.addSeparator();
 		this.menuEditar.add(reemplazar);
 		// JToolBar
