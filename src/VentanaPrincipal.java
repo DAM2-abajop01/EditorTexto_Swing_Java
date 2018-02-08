@@ -68,7 +68,7 @@ public class VentanaPrincipal {
 		this.ventana.setBounds(500, 300, 750, 600);
 		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	// Variable de la implementcion de Ismael
@@ -80,7 +80,7 @@ public class VentanaPrincipal {
 	private JMenu subMenuRecientes;
 	private ArrayList<JMenuItem> itemSubMenuRecientes;
 	private ArrayList<String> rutasRecientes;
-	//Item cargar hay que meter metodos
+	// Item cargar hay que meter metodos
 
 	public void componentesimplementacionIsmael() {
 		// En el menu bar Ismael
@@ -172,10 +172,10 @@ public class VentanaPrincipal {
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
 
-			btnHora.setIcon(new ImageIcon(this.canvas));			
+			btnHora.setIcon(new ImageIcon(this.canvas));
 			this.btnHora.setFont(fuenteHerramientas);
 			this.btnHora.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -261,12 +261,11 @@ public class VentanaPrincipal {
 							textoUsuario.setText(cadena);
 
 							textoUsuario.setFont(new Font("Verdana", Font.PLAIN, 12));
-							
+
 							textoUsuario.setEnabled(true);
-						
+
 							bCopiar.setEnabled(true);
 							bPegar.setEnabled(true);
-
 
 							guardar.setEnabled(true);
 							guardarComo.setEnabled(true);
@@ -274,7 +273,7 @@ public class VentanaPrincipal {
 							bGuardarComo.setEnabled(true);
 							textoUsuario.setEnabled(true);
 							reemplazar.setEnabled(true);
-							
+
 							// Listened Ismael
 							btnFuente.setEnabled(true);
 							itemFuente.setEnabled(true);
@@ -302,9 +301,7 @@ public class VentanaPrincipal {
 		this.textoUsuario = textArea;
 	}
 
-
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 	/**
 	 * Inicializa los componentes
@@ -397,11 +394,8 @@ public class VentanaPrincipal {
 		this.bBuscar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		// Diccionario
 		this.manejadorDiccionario = new ManejadorDiccionario();
-		this.diccionario = new ArrayList<>();
-		
 		componentesimplementacionIsmael();
 		toolbarImplementacionIsmael();
-
 		this.bCorregir = new JButton("Corregir");
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//check.png"));
@@ -492,7 +486,7 @@ public class VentanaPrincipal {
 						btnSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodoYCopiar.setEnabled(true);
-						
+
 						// Listened Ismael
 						btnFuente.setEnabled(true);
 						itemFuente.setEnabled(true);
@@ -502,7 +496,6 @@ public class VentanaPrincipal {
 
 						manejador.guardarFicheroRecientes(manejador.getFicheroActual().getPath());
 
-						
 						textoUsuario.requestFocus();
 					} catch (IOException e) {
 						JOptionPane.showMessageDialog(ventana, "No se puede cargar el fichero");
@@ -530,18 +523,23 @@ public class VentanaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				String texto = textoUsuario.getText().toString();
 				// Separo las palabras y las añado a un array
-				String[] palabras = texto.split(" ");
+				String[] palabras = texto.split("\\s");
+				ArrayList<String> palabrasCorrectas = new ArrayList<>();
 				// Compruebo si las palabras están en el diccionario
 				for (int i = 0; i < palabras.length; i++) {
 					for (int j = 0; j < diccionario.size(); j++) {
-						if (!palabras[i].equalsIgnoreCase(diccionario.get(j))) {
-							System.out.println(palabras);
+						if (palabras[i].equalsIgnoreCase(diccionario.get(j))) {
+							palabrasCorrectas.add(palabras[i]);
 						}
 					}
 				}
+				// SimpleAttributeSet conjuntodeAtributosNeutro = new SimpleAttributeSet();
+				// StyleConstants.setUnderline(conjuntodeAtributosNeutro, false);
+				// StyleConstants.setForeground(conjuntodeAtributosNeutro, Color.BLACK);
+				// textoUsuario.getStyledDocument().setCharacterAttributes(0,
+				// textoUsuario.getText().length()+1, conjuntodeAtributosNeutro, false);
 			}
 		});
-
 		// Guardar
 		this.guardar.addActionListener(new ActionListener() {
 			@Override
@@ -683,6 +681,7 @@ public class VentanaPrincipal {
 	 * Llama a los otros métodos para construir la ventana
 	 */
 	public void inicializar() {
+		this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.ventana.setVisible(true);
 		inicializarComponentes();
 		addElements();
