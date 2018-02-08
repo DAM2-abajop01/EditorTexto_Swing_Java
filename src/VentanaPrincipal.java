@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -57,6 +58,7 @@ public class VentanaPrincipal {
 	// Diccionario
 	private ManejadorDiccionario manejadorDiccionario;
 	private ArrayList<String> diccionario;
+	private JButton bCorregir;
 
 	/**
 	 * Constructor
@@ -400,6 +402,14 @@ public class VentanaPrincipal {
 		componentesimplementacionIsmael();
 		toolbarImplementacionIsmael();
 
+		this.bCorregir = new JButton("Corregir");
+		try {
+			this.canvas = ImageIO.read(new File("imagenes//check.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.bCorregir.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+		this.bCorregir.setEnabled(false);
 	}
 
 	/**
@@ -446,6 +456,7 @@ public class VentanaPrincipal {
 		this.toolBar.addSeparator();
 		this.toolBar.add(bCopiar);
 		this.toolBar.add(bPegar);
+		this.toolBar.add(bCorregir);
 		this.toolBar.add(Box.createHorizontalGlue());
 		this.toolBar.add(textoBuscador);
 		this.toolBar.add(bBuscar);
@@ -498,9 +509,28 @@ public class VentanaPrincipal {
 				if (chooser.showOpenDialog(ventana) == JFileChooser.APPROVE_OPTION) {
 					manejadorDiccionario.setRutaDiccionario(chooser.getSelectedFile());
 					diccionario = manejadorDiccionario.cargarDiccionario();
+					bCorregir.setEnabled(true);
 				}
 			}
 		});
+		// Botón Corregir
+		this.bCorregir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String texto = textoUsuario.getText().toString();
+				// Separo las palabras y las añado a un array
+				String[] palabras = texto.split(" ");
+				// Compruebo si las palabras están en el diccionario
+				for (int i = 0; i < palabras.length; i++) {
+					for (int j = 0; j < diccionario.size(); j++) {
+						if (!palabras[i].equalsIgnoreCase(diccionario.get(j))) {
+							System.out.println(palabras);
+						}
+					}
+				}
+			}
+		});
+
 		// Guardar
 		this.guardar.addActionListener(new ActionListener() {
 			@Override
