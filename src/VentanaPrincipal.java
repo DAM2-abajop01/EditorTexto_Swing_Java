@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -31,6 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author Alejandro Bajo Pérez
+ * @author Ismael Martín
  */
 public class VentanaPrincipal {
 
@@ -492,6 +492,17 @@ public class VentanaPrincipal {
 						btnSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodoYCopiar.setEnabled(true);
+						
+						// Listened Ismael
+						btnFuente.setEnabled(true);
+						itemFuente.setEnabled(true);
+						btnSeleccionarTodo.setEnabled(true);
+						itemSeleccionarTodo.setEnabled(true);
+						itemSeleccionarTodoYCopiar.setEnabled(true);
+
+						manejador.guardarFicheroRecientes(manejador.getFicheroActual().getPath());
+
+						
 						textoUsuario.requestFocus();
 					} catch (IOException e) {
 						JOptionPane.showMessageDialog(ventana, "No se puede cargar el fichero");
