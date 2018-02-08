@@ -1,5 +1,8 @@
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,14 +15,23 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
+
+/**
+ * @author Alejandro Bajo P
+ * @author Ismael Martín R
+ *
+ */
 public class DialogoFuente extends JDialog {
 
 	/**
@@ -30,11 +42,11 @@ public class DialogoFuente extends JDialog {
 	private VentanaPrincipal frame;
 	private String fuente;
 	private int fontEstilo;
-	JSlider sliderTamanio;
+	private JSlider sliderTamanio;
 	private JPanel panelFuente, panelEstilo, panelTamanio;
 	private JButton btnReemplazar;
-	private JLabel labelFuente, labelEstilo, labelTamanio;
-	private JTextField editFuente, editEstilo, editTamanio;
+	private JTextField editTamanio;
+	private JTextPane jtextPane;
 	ButtonGroup grupoFuente, grupoEstilo;
 	JRadioButton[] radiosFuentes = { new JRadioButton("Verdana"), new JRadioButton("Arial"),
 			new JRadioButton("Monospaced"), new JRadioButton("Times New Roman"), new JRadioButton("Comic Sans MS") };
@@ -45,14 +57,17 @@ public class DialogoFuente extends JDialog {
 		super();
 		this.frame = frame;
 
-		setBounds(100, 100, 300, 500);
+		setBounds(100, 100, 500, 600);
 		anadirComponentes();
 		anadirListened();
 	}
 
 	public void anadirComponentes() {
-		setLayout(new GridLayout(4, 1));
+		setLayout(new GridLayout(1, 2));
+		JPanel panelIzquierda = new JPanel();
+		panelIzquierda.setLayout(new GridLayout(4, 1));
 
+		
 		// Fuentes
 		panelFuente = new JPanel();
 		panelFuente.setLayout(new GridLayout(radiosFuentes.length, 1));
@@ -62,8 +77,9 @@ public class DialogoFuente extends JDialog {
 			grupoFuente.add(radiosFuentes[i]);
 			panelFuente.add(radiosFuentes[i]);
 		}
-		add(panelFuente);
-
+		panelIzquierda.add(panelFuente);
+				
+		
 		panelEstilo = new JPanel();
 		panelEstilo.setLayout(new GridLayout(radiosEstilos.length, 1));
 		panelEstilo.setBorder(BorderFactory.createTitledBorder("Fuente"));
@@ -72,23 +88,34 @@ public class DialogoFuente extends JDialog {
 			grupoEstilo.add(radiosEstilos[i]);
 			panelEstilo.add(radiosEstilos[i]);
 		}
-		add(panelEstilo);
-
+		panelIzquierda.add(panelEstilo);
+		
+		
 		panelTamanio = new JPanel();
 		panelTamanio.setLayout(new GridLayout(2, 1));
 		panelTamanio.setBorder(BorderFactory.createTitledBorder("Tamaño"));
 		sliderTamanio = new JSlider(JSlider.HORIZONTAL, 0, 50, 12);
-		sliderTamanio.setMajorTickSpacing(5);
+		sliderTamanio.setMajorTickSpacing(10);
 		sliderTamanio.setMinorTickSpacing(2);
 		sliderTamanio.setPaintTicks(true);
 		sliderTamanio.setPaintLabels(true);
 		panelTamanio.add(sliderTamanio);
 		editTamanio = new JTextField("12");
 		panelTamanio.add(editTamanio);
-		add(panelTamanio);
+		panelIzquierda.add(panelTamanio);
 
+		
 		btnReemplazar = new JButton("Hacer.");
-		add(btnReemplazar);
+		panelIzquierda.add(btnReemplazar);
+		add(panelIzquierda);
+		
+		
+
+		
+		jtextPane = new JTextPane();
+		//we.getStyledDocument().setCharacterAttributes(0, frame.getTextArea().getText().length()+1, conjuntodeAtributosNeutro, false); 
+		add(jtextPane);	
+		
 	}
 
 	public void anadirListened() {
@@ -112,20 +139,18 @@ public class DialogoFuente extends JDialog {
 					fontEstilo = Font.BOLD;
 				}
 
+			
 				int inicio = frame.getTextArea().getSelectionStart();
 				int fin = frame.getTextArea().getSelectionEnd();
+				SimpleAttributeSet conjuntodeAtributosNeutro = new SimpleAttributeSet();
+				StyleConstants.setUnderline(conjuntodeAtributosNeutro, false);
+				StyleConstants.setForeground(conjuntodeAtributosNeutro, Color.BLACK);
 				
-				
-				
-				
-				
-				
-				System.out.println("117DialogoFuente ->Posicion Selecionada: "+inicio+" / "+fin);
+				System.out.println("117DialogoFuente ->Posicion Selecionada: " + inicio + " / " + fin);
 				frame.getTextArea().setFont(new Font(fuente, fontEstilo, Integer.parseInt(editTamanio.getText())));
 
 			}
 		});
-		
 
 		// Detector del slided
 		sliderTamanio.addChangeListener(new ChangeListener() {
