@@ -72,10 +72,8 @@ public class VentanaPrincipal {
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	// Variable de la implementcion de Equipo
 	private JMenu menuEquipo;
-	private JMenuItem itemFuente;
-	private JButton btnFuente;
-	private JMenuItem itemSeleccionarTodo, itemSeleccionarTodoYCopiar, itemHora;
-	private JButton btnSeleccionarTodo, btnHora;
+	private JMenuItem itemSeleccionarTodo, itemSeleccionarTodoYCopiar, itemHora, itemFuente;
+	private JButton btnSeleccionarTodo, btnHora, btnFuente;
 	private JMenu subMenuRecientes;
 	private ArrayList<JMenuItem> itemSubMenuRecientes;
 	private ArrayList<String> rutasRecientes;
@@ -84,7 +82,6 @@ public class VentanaPrincipal {
 	public void componentesImplementacionEquipo() {
 		// En el menu bar Equipo
 		menuEquipo = new JMenu("Inicio");
-
 		// SUBMENU
 		subMenuRecientes = new JMenu("Recientes");
 		itemSubMenuRecientes = new ArrayList<>();
@@ -101,13 +98,11 @@ public class VentanaPrincipal {
 				subMenuRecientes.add(textoSubmenu);
 			}
 		}
-
 		// Fuente
 		itemFuente = new JMenuItem("Fuente");
 		itemFuente.setEnabled(false);
 		itemFuente.setMnemonic(KeyEvent.VK_F);
 		itemFuente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
-
 		// Seleccionar Todo
 		itemSeleccionarTodo = new JMenuItem("Selec.Todo");
 		itemSeleccionarTodo.setEnabled(false);
@@ -118,10 +113,9 @@ public class VentanaPrincipal {
 		itemSeleccionarTodoYCopiar.setEnabled(false);
 		itemSeleccionarTodoYCopiar.setMnemonic(KeyEvent.VK_M);
 		itemSeleccionarTodoYCopiar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
-
 		// Hora
 		itemHora = new JMenuItem("Hora");
-		itemHora.setEnabled(true);
+		itemHora.setEnabled(false);
 		itemHora.setMnemonic(KeyEvent.VK_H);
 		itemHora.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
 	}
@@ -215,7 +209,6 @@ public class VentanaPrincipal {
 				textoUsuario.setText(resultado);
 			}
 		});
-
 		// Listado del submenu
 		if (!itemSubMenuRecientes.isEmpty()) {
 			for (int i = 0; i < itemSubMenuRecientes.size(); i++) {
@@ -229,7 +222,6 @@ public class VentanaPrincipal {
 							String cadena = manejador.cargarFichero();
 							textoUsuario.setText(cadena);
 							textoUsuario.setFont(new Font("Verdana", Font.PLAIN, 12));
-							textoUsuario.setEnabled(true);
 							bCopiar.setEnabled(true);
 							bPegar.setEnabled(true);
 							guardar.setEnabled(true);
@@ -363,6 +355,8 @@ public class VentanaPrincipal {
 		}
 		this.bCorregir.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		this.bCorregir.setEnabled(false);
+		componentesImplementacionEquipo();
+		toolbarImplementacionEquipo();
 	}
 
 	/**
@@ -424,9 +418,6 @@ public class VentanaPrincipal {
 		this.toolBar.add(bCopiar);
 		this.toolBar.add(bPegar);
 		this.toolBar.add(bCorregir);
-		// Implementacion de equpipo
-		toolbarImplementacionEquipo();
-		componentesImplementacionEquipo();
 		this.toolBar.add(Box.createHorizontalGlue());
 		this.toolBar.add(textoBuscador);
 		this.toolBar.add(bBuscar);
@@ -434,7 +425,6 @@ public class VentanaPrincipal {
 		this.ventana.add(textoUsuario);
 		this.ventana.add(toolBar, BorderLayout.NORTH);
 		this.ventana.add(new JScrollPane(textoUsuario)); // Scroll
-
 	}
 
 	/**
@@ -458,16 +448,13 @@ public class VentanaPrincipal {
 						bGuardarComo.setEnabled(true);
 						textoUsuario.setEnabled(true);
 						reemplazar.setEnabled(true);
-						btnFuente.setEnabled(true);
 						itemFuente.setEnabled(true);
-						btnSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodoYCopiar.setEnabled(true);
-						btnFuente.setEnabled(true);
 						itemFuente.setEnabled(true);
+						itemHora.setEnabled(true);
+						btnFuente.setEnabled(true);
 						btnSeleccionarTodo.setEnabled(true);
-						itemSeleccionarTodo.setEnabled(true);
-						itemSeleccionarTodoYCopiar.setEnabled(true);
 						btnHora.setEnabled(true);
 						manejador.guardarFicheroRecientes(manejador.getFicheroActual().getPath());
 						textoUsuario.requestFocus();
@@ -633,7 +620,6 @@ public class VentanaPrincipal {
 			}
 		});
 		listenedImplementacionEquipo();
-
 	}
 
 	public String getTextoUsuario() {
@@ -658,8 +644,6 @@ public class VentanaPrincipal {
 		this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.ventana.setVisible(true);
 		inicializarComponentes();
-		componentesImplementacionEquipo();
-		toolbarImplementacionEquipo();
 		addElements();
 		inicializarListeners();
 	}
