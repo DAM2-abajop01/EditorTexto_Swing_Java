@@ -30,7 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author Alejandro Bajo Pérez
- * @author Ismael Martín
+ * @author Ismael Martín Ramírez
  */
 public class VentanaPrincipal {
 
@@ -70,7 +70,6 @@ public class VentanaPrincipal {
 	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 	// Variable de la implementcion de Equipo
 	private JMenu menuEquipo;
 	private JMenuItem itemFuente;
@@ -84,8 +83,7 @@ public class VentanaPrincipal {
 
 	public void componentesImplementacionEquipo() {
 		// En el menu bar Equipo
-		menuEquipo = new JMenu("AL~IS");
-		bar.add(menuEquipo);
+		menuEquipo = new JMenu("Inicio");
 
 		// SUBMENU
 		subMenuRecientes = new JMenu("Recientes");
@@ -94,7 +92,6 @@ public class VentanaPrincipal {
 		try {
 			rutasRecientes = manejador.obtenerLineasDelFichero();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (!rutasRecientes.isEmpty()) {
@@ -104,39 +101,29 @@ public class VentanaPrincipal {
 				subMenuRecientes.add(textoSubmenu);
 			}
 		}
-		menuEquipo.add(subMenuRecientes);
-
-		menuEquipo.addSeparator();
 
 		// Fuente
 		itemFuente = new JMenuItem("Fuente");
 		itemFuente.setEnabled(false);
 		itemFuente.setMnemonic(KeyEvent.VK_F);
 		itemFuente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
-		menuEquipo.add(itemFuente);
 
-		menuEquipo.addSeparator();
-
+		// Seleccionar Todo
 		itemSeleccionarTodo = new JMenuItem("Selec.Todo");
 		itemSeleccionarTodo.setEnabled(false);
 		itemSeleccionarTodo.setMnemonic(KeyEvent.VK_N);
 		itemSeleccionarTodo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		menuEquipo.add(itemSeleccionarTodo);
 
 		itemSeleccionarTodoYCopiar = new JMenuItem("Selec All+Copy");
 		itemSeleccionarTodoYCopiar.setEnabled(false);
 		itemSeleccionarTodoYCopiar.setMnemonic(KeyEvent.VK_M);
 		itemSeleccionarTodoYCopiar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
-		menuEquipo.add(itemSeleccionarTodoYCopiar);
 
-		menuEquipo.addSeparator();
-
+		// Hora
 		itemHora = new JMenuItem("Hora");
 		itemHora.setEnabled(true);
 		itemHora.setMnemonic(KeyEvent.VK_H);
 		itemHora.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
-		menuEquipo.add(itemHora);
-
 	}
 
 	public void toolbarImplementacionEquipo() {
@@ -149,31 +136,26 @@ public class VentanaPrincipal {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		toolBar.add(btnFuente);
-
+		// Seleccionar Todo
 		btnSeleccionarTodo = new JButton("Selec.Todo");
 		btnSeleccionarTodo.setEnabled(false);
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
 			this.btnSeleccionarTodo.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		toolBar.add(btnSeleccionarTodo);
-
+		// Hora
 		btnHora = new JButton("Hora");
+		btnHora.setEnabled(false);
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//copy.png"));
-
 			btnHora.setIcon(new ImageIcon(this.canvas));
 			this.btnHora.setFont(fuenteHerramientas);
 			this.btnHora.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		toolBar.add(btnHora);
 	}
 
 	public void listenedImplementacionEquipo() {
@@ -184,25 +166,21 @@ public class VentanaPrincipal {
 				itemFuente.doClick();
 			}
 		});
-
 		itemFuente.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DialogoFuente dialo = new DialogoFuente(VentanaPrincipal.this);
 				dialo.setVisible(true);
 			}
 		});
-
+		// Seleccionar Todo
 		btnSeleccionarTodo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				itemSeleccionarTodo.doClick();
 			}
 		});
-
 		itemSeleccionarTodo.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				textoUsuario.requestFocus();
@@ -210,7 +188,6 @@ public class VentanaPrincipal {
 			}
 		});
 		itemSeleccionarTodoYCopiar.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				textoUsuario.requestFocus();
@@ -218,9 +195,8 @@ public class VentanaPrincipal {
 				textoUsuario.copy();
 			}
 		});
-
+		// Hora
 		btnHora.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				itemHora.doClick();
@@ -267,11 +243,8 @@ public class VentanaPrincipal {
 							btnSeleccionarTodo.setEnabled(true);
 							itemSeleccionarTodo.setEnabled(true);
 							itemSeleccionarTodoYCopiar.setEnabled(true);
-
 							textoUsuario.requestFocus();
-
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -287,7 +260,6 @@ public class VentanaPrincipal {
 	public void setTextArea(JTextArea textArea) {
 		this.textoUsuario = textArea;
 	}
-
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	/**
@@ -371,9 +343,7 @@ public class VentanaPrincipal {
 			e.printStackTrace();
 		}
 		this.bPegar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-		
 
-		
 		// Buscar
 		this.bBuscar = new JButton();
 		try {
@@ -384,7 +354,7 @@ public class VentanaPrincipal {
 		this.bBuscar.setIcon(new ImageIcon(canvas.getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 		// Diccionario
 		this.manejadorDiccionario = new ManejadorDiccionario();
-	
+
 		this.bCorregir = new JButton("Corregir");
 		try {
 			this.canvas = ImageIO.read(new File("imagenes//check.png"));
@@ -433,15 +403,29 @@ public class VentanaPrincipal {
 		this.menuEditar.add(pegar);
 		this.menuEditar.addSeparator();
 		this.menuEditar.add(reemplazar);
+		// Barra Inicio
+		bar.add(menuEquipo);
+		menuEquipo.add(subMenuRecientes);
+		menuEquipo.addSeparator();
+		menuEquipo.add(itemFuente);
+		menuEquipo.addSeparator();
+		menuEquipo.add(itemSeleccionarTodo);
+		menuEquipo.add(itemSeleccionarTodoYCopiar);
+		menuEquipo.addSeparator();
+		menuEquipo.add(itemHora);
 		// JToolBar
 		this.toolBar.add(bCargar);
 		this.toolBar.add(bGuardar);
 		this.toolBar.add(bGuardarComo);
 		this.toolBar.addSeparator();
+		toolBar.add(btnFuente);
+		toolBar.add(btnSeleccionarTodo);
+		toolBar.add(btnHora);
+		this.toolBar.addSeparator();
 		this.toolBar.add(bCopiar);
-		this.toolBar.add(bPegar);			
+		this.toolBar.add(bPegar);
 		this.toolBar.add(bCorregir);
-		//Implementacion de equpipo
+		// Implementacion de equpipo
 		toolbarImplementacionEquipo();
 		componentesImplementacionEquipo();
 		this.toolBar.add(Box.createHorizontalGlue());
@@ -485,9 +469,8 @@ public class VentanaPrincipal {
 						btnSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodo.setEnabled(true);
 						itemSeleccionarTodoYCopiar.setEnabled(true);
-
+						btnHora.setEnabled(true);
 						manejador.guardarFicheroRecientes(manejador.getFicheroActual().getPath());
-
 						textoUsuario.requestFocus();
 					} catch (IOException e) {
 						JOptionPane.showMessageDialog(ventana, "No se puede cargar el fichero");

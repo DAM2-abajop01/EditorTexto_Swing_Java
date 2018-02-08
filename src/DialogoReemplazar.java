@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 /**
  * @author Alejandro Bajo Pérez
+ * @author Ismael Martín Ramírez
  */
 
 public class DialogoReemplazar extends JDialog {

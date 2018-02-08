@@ -44,7 +44,7 @@ public class DialogoFuente extends JDialog {
 	public DialogoFuente(VentanaPrincipal frame) {
 		super();
 		this.frame = frame;
-
+		this.setTitle("Seleccionador de Fuente");
 		setBounds(100, 100, 300, 500);
 		anadirComponentes();
 		anadirListened();
@@ -114,18 +114,12 @@ public class DialogoFuente extends JDialog {
 
 				int inicio = frame.getTextArea().getSelectionStart();
 				int fin = frame.getTextArea().getSelectionEnd();
-				
-				
-				
-				
-				
-				
-				System.out.println("117DialogoFuente ->Posicion Selecionada: "+inicio+" / "+fin);
+
+				System.out.println("117DialogoFuente ->Posicion Selecionada: " + inicio + " / " + fin);
 				frame.getTextArea().setFont(new Font(fuente, fontEstilo, Integer.parseInt(editTamanio.getText())));
 
 			}
 		});
-		
 
 		// Detector del slided
 		sliderTamanio.addChangeListener(new ChangeListener() {
