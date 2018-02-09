@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
@@ -239,6 +240,7 @@ public class VentanaPrincipal {
 							btnSeleccionarTodo.setEnabled(true);
 							itemSeleccionarTodo.setEnabled(true);
 							itemSeleccionarTodoYCopiar.setEnabled(true);
+							btnHora.setEnabled(true);
 							textoUsuario.requestFocus();
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -494,20 +496,19 @@ public class VentanaPrincipal {
 				String texto = textoUsuario.getText().toString();
 				// Separo las palabras y las añado a un array
 				String[] palabras = texto.split("\\s");
-				ArrayList<String> palabrasCorrectas = new ArrayList<>();
+				ArrayList<String> palabrasIncorrectas = new ArrayList<>(Arrays.asList(palabras));
 				// Compruebo si las palabras están en el diccionario
 				for (int i = 0; i < palabras.length; i++) {
 					for (int j = 0; j < diccionario.size(); j++) {
 						if (palabras[i].equalsIgnoreCase(diccionario.get(j))) {
-							palabrasCorrectas.add(palabras[i]);
+							palabrasIncorrectas.remove(palabras[i]);
 						}
 					}
 				}
-				// SimpleAttributeSet conjuntodeAtributosNeutro = new SimpleAttributeSet();
-				// StyleConstants.setUnderline(conjuntodeAtributosNeutro, false);
-				// StyleConstants.setForeground(conjuntodeAtributosNeutro, Color.BLACK);
-				// textoUsuario.getStyledDocument().setCharacterAttributes(0,
-				// textoUsuario.getText().length()+1, conjuntodeAtributosNeutro, false);
+				System.out.println("\n---->Palabras que no están en el diccionario\n");
+				for (int j = 0; j < palabrasIncorrectas.size(); j++) {
+					System.out.println(palabrasIncorrectas.get(j));
+				}
 			}
 		});
 		// Guardar

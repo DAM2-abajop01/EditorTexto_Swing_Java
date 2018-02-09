@@ -28,6 +28,7 @@ public class DialogoReemplazar extends JDialog {
 
 	public DialogoReemplazar(JFrame posicion, VentanaPrincipal ventana) {
 		super();
+		this.setTitle("Reemplazar");
 		this.ventana = ventana;
 		setBounds((int) posicion.getLocationOnScreen().getX(), (int) posicion.getLocationOnScreen().getY(), 250, 300);
 		anadirElementos();
