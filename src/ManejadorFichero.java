@@ -94,7 +94,11 @@ public class ManejadorFichero {
 			BufferedReader br = new BufferedReader(new FileReader(ficheroReciente));
 			String linea = br.readLine();
 			while ((linea) != null) {
-				rutas.add(linea);
+				
+				//Evitar repetipos
+			if(!rutas.contains(linea)) {
+					rutas.add(linea);
+			}				
 				linea = br.readLine();
 			}
 			br.close();

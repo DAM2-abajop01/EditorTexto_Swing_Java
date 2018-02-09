@@ -1,1 +1,4 @@
 C:\Users\alexb\a.txt
+C:\Users\IsmA\zombie.txt
+C:\Users\IsmA\Desktop\ejericio03Consulta.txt
+C:\Users\IsmA\zombie.txt
