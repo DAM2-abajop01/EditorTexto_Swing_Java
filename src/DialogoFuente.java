@@ -95,7 +95,7 @@ public class DialogoFuente extends JDialog {
 		panelTamanio.add(editTamanio);
 		panelIzquierda.add(panelTamanio);
 
-		btnReemplazar = new JButton("Hacer.");
+		btnReemplazar = new JButton("Hacer");
 		panelIzquierda.add(btnReemplazar);
 		add(panelIzquierda);
 
@@ -110,12 +110,11 @@ public class DialogoFuente extends JDialog {
 		btnReemplazar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int inicio = frame.getTextArea().getSelectionStart();
 				int fin = frame.getTextArea().getSelectionEnd();
 
 				SimpleAttributeSet data = new SimpleAttributeSet();
-				
 
 				for (int i = 0; i < radiosFuentes.length; i++) {
 					if (radiosFuentes[i].isSelected()) {
@@ -134,13 +133,12 @@ public class DialogoFuente extends JDialog {
 					StyleConstants.setBold(data, true);
 				}
 
-			
 				StyleConstants.setUnderline(data, true);
 				StyleConstants.setForeground(data, Color.RED);
 				jTextPane.setText(frame.getTextoUsuario());
-				jTextPane.getStyledDocument().setCharacterAttributes(inicio+1,fin-1, data, false);
+				jTextPane.getStyledDocument().setCharacterAttributes(inicio + 1, fin - 1, data, false);
 
-				System.out.println("117DialogoFuente ->\nPosicion Selecionada: " + inicio + " / " + fin);
+				System.out.println("DialogoFuente ->\nPosicion Selecionada: " + inicio + " / " + fin);
 				frame.getTextArea().setFont(new Font(fuente, fontEstilo, Integer.parseInt(editTamanio.getText())));
 				jTextPane.setFont(new Font(fuente, fontEstilo, Integer.parseInt(editTamanio.getText())));
 			}

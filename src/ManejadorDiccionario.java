@@ -20,7 +20,7 @@ public class ManejadorDiccionario {
 	 */
 	public ManejadorDiccionario() {
 		this.palabras = new ArrayList<>();
-		this.rutaDiccionario = new File(System.getProperty("user.home"));
+		this.rutaDiccionario = new File("diccionario" + File.separator + "spanish.dic");
 	}
 
 	/**

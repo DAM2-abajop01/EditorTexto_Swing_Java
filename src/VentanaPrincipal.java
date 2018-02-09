@@ -479,14 +479,8 @@ public class VentanaPrincipal {
 		this.cargarDiccionario.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser chooser = new JFileChooser(manejadorDiccionario.getRutaDiccionario());
-				chooser.setFileFilter(new FileNameExtensionFilter("Ficheros de diccionario", "dic"));
-				chooser.setAcceptAllFileFilterUsed(false);
-				if (chooser.showOpenDialog(ventana) == JFileChooser.APPROVE_OPTION) {
-					manejadorDiccionario.setRutaDiccionario(chooser.getSelectedFile());
-					diccionario = manejadorDiccionario.cargarDiccionario();
-					bCorregir.setEnabled(true);
-				}
+				diccionario = manejadorDiccionario.cargarDiccionario();
+				bCorregir.setEnabled(true);
 			}
 		});
 		// Botón Corregir
